@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SimpleDragger : MonoBehaviour, IDragger
 {
-    [SerializeField] private float _transferSpeedFactor = 100;
+    [SerializeField] private float _transferSpeedFactor = 20;
     [SerializeField] private float _previousMovementsMax = 5;
     [SerializeField] private float _speed = 100;
     private Vector3 _zVectorOffset = Vector3.forward * 6;
