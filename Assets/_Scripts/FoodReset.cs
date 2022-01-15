@@ -4,7 +4,7 @@ public class FoodReset : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {
-        var dragger = collision.gameObject.GetComponent<Dragger>();
+        var dragger = collision.gameObject.GetComponent<IDragger>();
 
         dragger?.Reset();
     }

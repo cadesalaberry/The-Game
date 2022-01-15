@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dragger : MonoBehaviour
+public class DraggerWithHistory : MonoBehaviour, IDragger
 {
     [SerializeField] private float _transferSpeedFactor = 100;
+    [SerializeField] private float _recentMovementsImportance = 100;
     [SerializeField] private float _previousMovementsMax = 5;
     [SerializeField] private float _speed = 100;
     private Vector3 _zVectorOffset = Vector3.forward * 6;
@@ -19,7 +20,7 @@ public class Dragger : MonoBehaviour
     void Awake()
     {
         _cam = Camera.main;
-		_rb = GetComponent<Rigidbody>();
+		    _rb = GetComponent<Rigidbody>();
         _initialPosition = transform.position;
     }
 
@@ -28,6 +29,8 @@ public class Dragger : MonoBehaviour
         var movementSpeed = _speed * Time.deltaTime;
 
         _rb.isKinematic = true;
+        _rb.Sleep();
+
         _originalDragPosition = transform.position;
         _dragOffset = _originalDragPosition - GetMousePos();
 
@@ -43,16 +46,12 @@ public class Dragger : MonoBehaviour
         var movementSpeed = _speed * Time.deltaTime;
         _rb.isKinematic = false;
         var finalPosition = GetMousePos() + _dragOffset + _zVectorOffset;
-        var newVelocity = (finalPosition - transform.position) * _transferSpeedFactor;
 
         transform.position = Vector3.MoveTowards(transform.position, finalPosition, movementSpeed);
 
-        // var averageVector = new Vector3(
-        // _previousMovements.Average(vector => vector.x),
-        // _previousMovements.Average(vector => vector.y),
-        // _previousMovements.Average(vector => vector.z));
+        var averageVector = GetWeightedAverageVector(_previousMovements);
 
-        // var newVelocity = _transferSpeedFactor * averageVector;
+        var newVelocity = _transferSpeedFactor * averageVector;
 
         Debug.Log(newVelocity);
 
@@ -90,4 +89,23 @@ public class Dragger : MonoBehaviour
         mousePos.z = 0;
         return mousePos;
     }
+
+    Vector3 GetWeightedAverageVector(List<Vector3> vectors)
+    {
+      var total = vectors.Count;
+      var sumVector = new Vector3(0, 0, 0);
+
+      for (int i = 0; i < total; i++)
+      {
+          var priority = total - i;
+          var weight = priority * _recentMovementsImportance;
+
+          sumVector += vectors[i] * weight;
+      }
+
+      var averageVector = sumVector / total;
+
+      return averageVector;
+    }
+
 }
