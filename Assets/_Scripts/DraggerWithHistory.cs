@@ -3,30 +3,29 @@ using UnityEngine;
 
 public class DraggerWithHistory : MonoBehaviour, IDragger
 {
-    [SerializeField] private float _transferSpeedFactor = 100;
-    [SerializeField] private float _recentMovementsImportance = 100;
-    [SerializeField] private float _previousMovementsMax = 5;
-    [SerializeField] private float _speed = 100;
+    [SerializeField] private float _speedMultiplierOnRelease = 3;
+    [SerializeField] private float _rememberXPreviousMovements = 5;
+    [SerializeField] private float _followFingerSpeed = 100;
     private Vector3 _zVectorOffset = Vector3.forward * 6;
     private Vector3 _originalDragPosition;
-    private Vector3 _initialPosition;
+    private Vector3 _spawnPosition;
     private Vector3 _dragOffset;
     private Camera _cam;
     private	Rigidbody _rb;
     private List<Vector3> _previousMovements = new List<Vector3>();
 
-
+    public Vector3 getSpawnPosition() => _spawnPosition;
 
     void Awake()
     {
         _cam = Camera.main;
-		    _rb = GetComponent<Rigidbody>();
-        _initialPosition = transform.position;
+		_rb = GetComponent<Rigidbody>();
+        _spawnPosition = transform.position;
     }
 
     void OnMouseDown()
     {
-        var movementSpeed = _speed * Time.deltaTime;
+        var movementSpeed = _followFingerSpeed * Time.deltaTime;
 
         _rb.isKinematic = true;
         _rb.Sleep();
@@ -41,17 +40,33 @@ public class DraggerWithHistory : MonoBehaviour, IDragger
         _previousMovements.Clear();
     }
 
+    void OnMouseDrag()
+    {
+        var finalPosition = GetMousePos() + _dragOffset + _zVectorOffset;
+        var movementSpeed = _followFingerSpeed * Time.deltaTime;
+        var movementVector = finalPosition - transform.position;
+
+        transform.position = Vector3.MoveTowards(transform.position, finalPosition, movementSpeed);
+        Debug.DrawLine(finalPosition, transform.position, Color.white, 3);
+
+        _previousMovements.Add(movementVector);
+        if (_previousMovements.Count >= _rememberXPreviousMovements)
+        {
+            _previousMovements.RemoveAt(0);
+        }
+    }
+
     void OnMouseUp()
     {
-        var movementSpeed = _speed * Time.deltaTime;
+        var movementSpeed = _followFingerSpeed * Time.deltaTime;
         _rb.isKinematic = false;
         var finalPosition = GetMousePos() + _dragOffset + _zVectorOffset;
 
         transform.position = Vector3.MoveTowards(transform.position, finalPosition, movementSpeed);
 
-        var averageVector = GetWeightedAverageVector(_previousMovements);
+        var averageVector = SumVector(_previousMovements);
 
-        var newVelocity = _transferSpeedFactor * averageVector;
+        var newVelocity = _speedMultiplierOnRelease * averageVector;
 
         Debug.Log(newVelocity);
 
@@ -60,25 +75,9 @@ public class DraggerWithHistory : MonoBehaviour, IDragger
         Debug.DrawLine(finalPosition, transform.position, Color.white, 3);
     }
 
-    void OnMouseDrag()
-    {
-        var finalPosition = GetMousePos() + _dragOffset + _zVectorOffset;
-        var movementSpeed = _speed * Time.deltaTime;
-        var movementVector = finalPosition - transform.position;
-
-        transform.position = Vector3.MoveTowards(transform.position, finalPosition, movementSpeed);
-        Debug.DrawLine(finalPosition, transform.position, Color.white, 3);
-
-        _previousMovements.Add(movementVector);
-        if (_previousMovements.Count >= _previousMovementsMax)
-        {
-            _previousMovements.RemoveAt(0);
-        }
-    }
-
     public void Reset()
     {
-        transform.position = _initialPosition;
+        transform.position = getSpawnPosition();
         _rb.Sleep();
     }
 
@@ -90,22 +89,16 @@ public class DraggerWithHistory : MonoBehaviour, IDragger
         return mousePos;
     }
 
-    Vector3 GetWeightedAverageVector(List<Vector3> vectors)
+    Vector3 SumVector(List<Vector3> vectors)
     {
-      var total = vectors.Count;
-      var sumVector = new Vector3(0, 0, 0);
+        var total = vectors.Count;
+        var sumVector = new Vector3(0, 0, 0);
 
-      for (int i = 0; i < total; i++)
-      {
-          var priority = total - i;
-          var weight = priority * _recentMovementsImportance;
+        for (int i = 0; i < total; i++)
+        {
+            sumVector += vectors[i];
+        }
 
-          sumVector += vectors[i] * weight;
-      }
-
-      var averageVector = sumVector / total;
-
-      return averageVector;
+        return sumVector;
     }
-
 }
