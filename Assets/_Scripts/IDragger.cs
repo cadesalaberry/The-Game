@@ -1,4 +1,7 @@
+using UnityEngine;
+
 public interface IDragger
 {
-  void Reset();
+    Vector3 getSpawnPosition();
+    void Reset();
 }

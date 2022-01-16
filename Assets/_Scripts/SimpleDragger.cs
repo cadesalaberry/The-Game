@@ -8,19 +8,19 @@ public class SimpleDragger : MonoBehaviour, IDragger
     [SerializeField] private float _speed = 100;
     private Vector3 _zVectorOffset = Vector3.forward * 6;
     private Vector3 _originalDragPosition;
-    private Vector3 _initialPosition;
+    private Vector3 _spawnPosition;
     private Vector3 _dragOffset;
     private Camera _cam;
     private	Rigidbody _rb;
     private List<Vector3> _previousMovements = new List<Vector3>();
 
-
+    public Vector3 getSpawnPosition() => _spawnPosition;
 
     void Awake()
     {
         _cam = Camera.main;
 		_rb = GetComponent<Rigidbody>();
-        _initialPosition = transform.position;
+        _spawnPosition = transform.position;
     }
 
     void OnMouseDown()
@@ -79,7 +79,7 @@ public class SimpleDragger : MonoBehaviour, IDragger
 
     public void Reset()
     {
-        transform.position = _initialPosition;
+        transform.position = getSpawnPosition();
         _rb.Sleep();
     }
 

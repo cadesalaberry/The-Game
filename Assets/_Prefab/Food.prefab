@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8671799716905843039}
   - component: {fileID: 8671799716905843008}
   - component: {fileID: 8671799716905843009}
-  - component: {fileID: 9011361846462844707}
   - component: {fileID: 6800980210235197004}
+  - component: {fileID: 4291829659066070943}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -63,21 +63,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9011361846462844707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8671799716905843010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f35e03f7ca7e429598151c06ebd9f31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transferSpeedFactor: 20
-  _previousMovementsMax: 5
-  _speed: 100
 --- !u!212 &6800980210235197004
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129,3 +114,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4291829659066070943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8671799716905843010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1e789a5abb141458f524913df8e68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transferSpeedFactor: 5
+  _recentMovementsImportance: 10
+  _previousMovementsMax: 5
+  _speed: 100
