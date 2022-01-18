@@ -1446,7 +1446,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8671799716905843039, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
+  MaxScore: 10
   FoodAssets: []
+  ScoreText: {fileID: 1403971310}
+  RetryButton: {fileID: 391969363}
+  EatenFood: []
 --- !u!1001 &1392177799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1628,7 +1632,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &1511201137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1642,7 +1646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 94, y: 176}
   m_ScreenMatchMode: 0

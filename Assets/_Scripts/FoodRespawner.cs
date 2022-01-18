@@ -17,9 +17,8 @@ public class FoodRespawner : MonoBehaviour
 
         if (foodFactoryGO == null) return;
 
-        var foodFactory = foodFactoryGO.GetComponent<FoodFactory>();
+        var gameLogic = foodFactoryGO.GetComponent<GameLogic>();
 
-        Destroy(gameObject);
-        foodFactory.SpawnRandomFoodAt(spawnPosition);
+        gameLogic.EatFood(gameObject, spawnPosition);
     }
 }
