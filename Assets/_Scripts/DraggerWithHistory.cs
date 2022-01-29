@@ -16,7 +16,7 @@ public class DraggerWithHistory : MonoBehaviour, IDragger
 
     public Vector3 getSpawnPosition() => _spawnPosition;
 
-    void Awake()
+    void Start()
     {
         _cam = Camera.main;
 		_rb = GetComponent<Rigidbody>();
