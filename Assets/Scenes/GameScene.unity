@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retry
+  m_Text: Start
 --- !u!222 &7596641
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -335,6 +335,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple
       objectReference: {fileID: 0}
+    - target: {fileID: 8671799716905843010, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
+      propertyPath: m_TagString
+      value: Food
+      objectReference: {fileID: 0}
     - target: {fileID: 8671799716905843039, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -394,7 +398,7 @@ GameObject:
   - component: {fileID: 391969364}
   - component: {fileID: 391969363}
   m_Layer: 5
-  m_Name: RetryButton
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,9 +1451,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8671799716905843039, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
   MaxScore: 10
-  FoodAssets: []
+  FoodDefinitions:
+    collection: []
   ScoreText: {fileID: 1403971310}
-  RetryButton: {fileID: 391969363}
+  StartButton: {fileID: 0}
   EatenFood: []
 --- !u!1001 &1392177799
 PrefabInstance:
@@ -1469,6 +1474,10 @@ PrefabInstance:
     - target: {fileID: 8671799716905843010, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
       propertyPath: m_Name
       value: Banana
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671799716905843010, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     - target: {fileID: 8671799716905843039, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
       propertyPath: m_RootOrder
@@ -1821,6 +1830,10 @@ PrefabInstance:
     - target: {fileID: 8671799716905843010, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
       propertyPath: m_Name
       value: Asparagus
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671799716905843010, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     - target: {fileID: 8671799716905843039, guid: ef5da026b711c410e95f88bf659c3590, type: 3}
       propertyPath: m_RootOrder

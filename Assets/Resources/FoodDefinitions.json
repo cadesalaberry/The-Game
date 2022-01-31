@@ -1,0 +1,56 @@
+﻿{
+    "collection": [
+        {
+            "id": "apple",
+            "name": "Apple",
+            "type": "fruit",
+            "sprite_name": "apple",
+            "scientific_name": "Malus pumila",
+            "description": "The apple is the pomaceous fruit of the apple tree, species Malus domestica in the rose family. It is one of the most widely cultivated tree fruits, and the most widely known of the many members of genus Malus that are used by humans. Apples grow on small, deciduous trees. The tree originated in Central Asia, where its wild ancestor, Malus sieversii, is still found today. Apples have been grown for thousands of years in Asia and Europe, and were brought to North America by European colonists. Apples have been present in the mythology and religions of many cultures, including Norse, Greek and Christian traditions. In 2010, the fruit's genome was decoded, leading to new understandings of disease control and selective breeding in apple production. There are more than 7,500 known cultivars of apples, resulting in a range of desired characteristics. Different cultivars are bred for various tastes and uses, including in cooking, fresh eating and cider production. Domestic apples are generally propagated by grafting, although wild apples grow readily from seed. Trees are prone to a number of fungal, bacterial and pest problems, which can be controlled by a number of organic and non-organic means. About 69 million tonnes of apples were grown worldwide in 2010, and China produced almost half of this total. The United States is the second-leading producer, with more than 6% of world production. Turkey is third, followed by Italy, India and Poland. Apples are often eaten raw, but can also be found in many prepared foods (especially desserts) and drinks. Many beneficial health effects have been found from eating apples; however, two forms of allergies are seen to various proteins found in the fruit.",
+            "compounds": {
+                "water": "0.57910269",
+                "fiber": "0.0134",
+                "fat": "0.0038"
+            }
+        },
+        {
+            "id": "banana",
+            "name": "Banana",
+            "type": "fruit",
+            "sprite_name": "Banana",
+            "scientific_name": "Musa acuminata",
+            "description": "A banana is an edible fruit produced by several kinds of large herbaceous flowering plants in the genus Musa. (In some countries, bananas used for cooking may be called plantains.) The fruit is variable in size, color and firmness, but is usually elongated and curved, with soft flesh rich in starch covered with a rind which may be green, yellow, red, purple, or brown when ripe. The fruits grow in clusters hanging from the top of the plant. Almost all modern edible parthenocarpic (seedless) bananas come from two wild species - Musa acuminata and Musa balbisiana. The scientific names of most cultivated bananas are Musa acuminata, Musa balbisiana, and Musa × paradisiaca for the hybrid Musa acuminata × M. balbisiana, depending on their genomic constitution. The old scientific name Musa sapientum is no longer used.",
+            "compounds": {
+                "water": "0.000345",
+                "fiber": "0.0",
+                "fat": "0.0"
+            }
+        },
+        {
+            "id": "asparagus",
+            "name": "Asparagus",
+            "type": "vegetable",
+            "sprite_name": "Asparagus",
+            "scientific_name": "Asparagus officinalis",
+            "description": "Asparagus officinalis is a spring vegetable, a flowering perennial plant species in the genus Asparagus. It was once classified in the lily family, like its Allium cousins, onions and garlic, but the Liliaceae have been split and the onion-like plants are now in the family Amaryllidaceae and asparagus in the Asparagaceae. Asparagus officinalis is native to most of Europe, northern Africa and western Asia, and is widely cultivated as a vegetable crop.",
+            "compounds": {
+                "water": "0.74280108",
+                "fiber": "0.00862",
+                "fat": "0.0025"
+            }
+        },
+        {
+            "id": "butter",
+            "name": "Butter",
+            "type": "vegetable",
+            "sprite_name": "Butter",
+            "scientific_name": "",
+            "description": "Butter is a dairy product made by churning fresh or fermented cream or milk. It is generally used as a spread and a condiment, as well as in cooking applications, such as baking, sauce making, and pan frying. Butter consists of butterfat, water and milk proteins. Most frequently made from cows' milk, butter can also be manufactured from the milk of other mammals, including sheep, goats, buffalo, and yaks. Salt, flavorings and preservatives are sometimes added to butter. Rendering butter produces clarified butter or ghee, which is almost entirely butterfat. [Wikipedia]",
+            "compounds": {
+                "water": "0.08350203",
+                "fiber": "0.0",
+                "fat": "0.8195"
+            }
+        }
+    ]
+}
