@@ -40,8 +40,8 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: build-WebGL
+          path: build/WebGL
 
   build-android:
     name: Build for Android 🤖
@@ -73,5 +73,5 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: build-Android
+          path: build/Android
