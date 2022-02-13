@@ -68,6 +68,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: Android
+          androidAppBundle: true
 
       # Output
       - uses: actions/upload-artifact@v2
