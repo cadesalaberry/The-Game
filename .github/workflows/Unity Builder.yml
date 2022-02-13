@@ -3,8 +3,8 @@ name: Actions 😎
 on: [push]
 
 jobs:
-  build:
-    name: Build my project ✨
+  build-web:
+    name: Build for WEB 🌐
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -36,6 +36,38 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
+
+  build-android:
+    name: Build for Android 🤖
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: Android
 
       # Output
       - uses: actions/upload-artifact@v2
