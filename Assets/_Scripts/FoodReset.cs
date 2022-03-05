@@ -16,5 +16,7 @@ public class FoodReset : MonoBehaviour
         if (foodFactoryGO == null) return;
 
         var gameLogic = foodFactoryGO.GetComponent<GameLogic>();
+
+        gameLogic.SpawnRandomFoodAtPosition(spawnPosition);
     }
 }
