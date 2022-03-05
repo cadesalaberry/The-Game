@@ -12,6 +12,9 @@ public class GameLogic : MonoBehaviour
     public Text ScoreText;
     public Button StartButton;
     public List<FoodSpecs> EatenFood;
+    public GameObject completeLevelUI;
+    public Text completeLevelTitle;
+    public Text completeLevelType;
 
     // Start is called before the first frame update
     void Start()
@@ -68,28 +71,79 @@ public class GameLogic : MonoBehaviour
         }
 
         setScore(scoreAsString);
-        Debug.Log("Done eating food, showing retry button");
+        CompleteLevel();
+    }
+
+    private void CompleteLevel()
+    {
+        Debug.Log("Done eating food, showing complete level screen");
+        var totalFood = GetFoodTotal(EatenFood);
+        var bristolScore = GetBristolScore(totalFood);
+        var title = "FAILURE";
+        var type = "Type " + bristolScore;
+
+        if (bristolScore == 5)
+        {
+           title = "SUCCESS";
+        }
+
+        completeLevelTitle.text = title;
+        completeLevelType.text = type;
         StartButton.gameObject.SetActive(true);
+        completeLevelUI.SetActive(true);
+
     }
 
     private string GetScoreAsString(List<FoodSpecs> eatenFood)
     {
-        var totalFat = 0.0;
-        var totalWater = 0.0;
-        var totalFiber = 0.0;
+        var totalFood = GetFoodTotal(eatenFood);
+
+        var fat = Math.Round(totalFood.fat, 5);
+        var fib = Math.Round(totalFood.fiber, 5);
+        var wat = Math.Round(totalFood.water, 5);
+
+        return $"fat: {fat}\nfib: {fib}\nwat: {wat}";
+    }
+
+
+    private FoodItemCoumpounds GetFoodTotal(List<FoodSpecs> eatenFood)
+    {
+        var totalFat = 0.0f;
+        var totalFiber = 0.0f;
+        var totalWater = 0.0f;
 
         eatenFood.ForEach((eatenFood) =>
         {
             totalFat += eatenFood.getFoodItem().compounds.fat;
-            totalWater += eatenFood.getFoodItem().compounds.water;
             totalFiber += eatenFood.getFoodItem().compounds.fiber;
+            totalWater += eatenFood.getFoodItem().compounds.water;
         });
 
-        var fat = Math.Round(totalFat, 5);
-        var fib = Math.Round(totalFiber, 5);
-        var wat = Math.Round(totalWater, 5);
+        return new FoodItemCoumpounds {
+            fat = totalFat,
+            fiber = totalFiber,
+            water = totalWater,
+        };
+    }
 
-        return $"fat: {fat}\nfib: {fib}\nwat: {wat}";
+    /**
+     * Very simple algorithm.
+     * If we have to much water returns type 1.
+     * If we have not enough water returns type 7.
+     */
+    private int GetBristolScore(float fat, float fiber, float water)
+    {
+        var array = new float[] { fat, fiber, water };
+
+        if (Mathf.Min(array) == water) return 1;
+
+        if (Mathf.Max(array) == water) return 7;
+
+        return 5;
+    }
+    private int GetBristolScore(FoodItemCoumpounds compounds)
+    {
+        return GetBristolScore(compounds.fat, compounds.fiber, compounds.water);
     }
 
     public void Retry()
@@ -97,6 +151,7 @@ public class GameLogic : MonoBehaviour
         EatenFood.Clear();
         ScoreText.text = GetScoreAsString(EatenFood);
         StartButton.gameObject.SetActive(false);
+        completeLevelUI.SetActive(false);
         StartButton.GetComponentInChildren<Text>().text = "Retry";
         CleanAllRemainingFood();
         SpawnInitialFood();
