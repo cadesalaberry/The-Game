@@ -90,6 +90,23 @@ public class GameLogic : MonoBehaviour
         completeLevelTitle.text = title;
         completeLevelType.text = type;
         StartButton.gameObject.SetActive(true);
+        var images = completeLevelUI.GetComponentsInChildren<Image>(true);
+        var wantedImageName = "bristol-type-" + bristolScore;
+
+        foreach (var image in images)
+        {
+            var name = image.name;
+
+            if (name == wantedImageName)
+            {
+                Debug.Log($"Showing {name}");
+                image.gameObject.SetActive(true);
+            }
+            else if (name.StartsWith("bristol-type-"))
+            {
+                image.gameObject.SetActive(false);
+            }
+        }
         completeLevelUI.SetActive(true);
 
     }
